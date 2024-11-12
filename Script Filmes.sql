@@ -325,3 +325,58 @@ REFERENCES [dbo].[Generos] ([Id])
 GO
 ALTER TABLE [dbo].[FilmesGenero] CHECK CONSTRAINT [FK__FilmesGen__IdGen__2E1BDC42]
 GO
+
+SELECT Nome, Ano 
+FROM Filmes;
+
+SELECT Nome, Ano 
+FROM Filmes 
+ORDER BY Ano ASC;
+
+SELECT Nome, Ano, Duracao 
+FROM Filmes 
+WHERE Nome = 'De Volta para o Futuro';
+
+SELECT Nome 
+FROM Filmes 
+WHERE Ano = 1997;
+
+SELECT Nome 
+FROM Filmes 
+WHERE Ano > 2000;
+
+SELECT Nome, Duracao 
+FROM Filmes 
+WHERE Duracao > 100 AND Duracao < 150 
+ORDER BY Duracao ASC;
+
+SELECT Ano, COUNT(Id) AS QuantidadeFilmes 
+FROM Filmes 
+GROUP BY Ano 
+ORDER BY COUNT(Id) DESC;
+
+SELECT PrimeiroNome, UltimoNome 
+FROM Atores 
+WHERE Genero = 'M';
+
+SELECT PrimeiroNome, UltimoNome 
+FROM Atores 
+WHERE Genero = 'F' 
+ORDER BY PrimeiroNome ASC;
+
+SELECT F.Nome AS Filme, G.Genero 
+FROM Filmes F
+JOIN FilmesGenero FG ON F.Id = FG.IdFilme
+JOIN Generos G ON FG.IdGenero = G.Id;
+
+SELECT F.Nome AS Filme, G.Genero 
+FROM Filmes F
+JOIN FilmesGenero FG ON F.Id = FG.IdFilme
+JOIN Generos G ON FG.IdGenero = G.Id 
+WHERE G.Genero = 'Mistério';
+
+SELECT F.Nome AS Filme, A.PrimeiroNome, A.UltimoNome, E.Papel 
+FROM Filmes F
+JOIN ElencoFilme E ON F.Id = E.IdFilme
+JOIN Atores A ON E.IdAtor = A.Id;
+
